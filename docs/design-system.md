@@ -8,7 +8,7 @@ O Software UP é o aplicativo web do Universo do Propósito: o comprador entra c
 
 - **Uma coisa por tela.** Cada tela tem um objetivo e, no máximo, uma ação principal (`primary`). O aluno é empresário, não é da área de tecnologia.
 - **Celular primeiro.** Desenhe em 360–390px e depois amplie. Toda tela precisa funcionar com o polegar.
-- **O código calcula, a IA escreve.** Números vêm sempre do cálculo e são exibidos com algarismos tabulares. Texto da IA aparece com o rótulo "Escrito com apoio de IA" e nunca é a única forma de ver um resultado: se a IA falhar, mostre o texto fixo das regras.
+- **Regras claras, resultados verificáveis.** Na primeira versão, números e prioridades vêm dos cálculos do sistema. As orientações usam textos fixos e os modelos são editáveis pelo aluno. Não há geração por IA nem rótulo de conteúdo gerado.
 - **Clareza antes de enfeite.** A interface é macia e organizada: cantos bem arredondados, botões em pílula, números grandes e muito respiro. Gradiente, só o vertical e suave dos cards de brilho (branco → cinza). Nada de foto de fundo, neon, gradiente colorido ou emoji. Espaço vazio fica vazio.
 - **Não invente.** Use só os indicadores, campos, estados e textos definidos na especificação. Na dúvida, deixe de fora.
 
@@ -132,7 +132,7 @@ Como a interface trata cada situação:
 - **Sem acesso a um item do Kit.** O item aparece com `lock`, o texto "Disponível no Kit UP de Implementação" e um botão para o link de compra configurado no admin. A navegação mostra o Kit com cadeado, mas não o esconde.
 - **Acesso encerrado** (reembolsado, chargeback ou revogado). Use um `up-alert--neutral` dizendo que o acesso foi encerrado e que os dados continuam guardados, com o caminho para o suporte. Não apague nem esconda o histórico do aluno.
 - **Ferramenta não iniciada, em andamento ou concluída.** Use os selos "Não iniciado", "Em andamento" e "Concluído". Diagnósticos se marcam como "Inicial" ou "Refeito".
-- **IA indisponível.** Mostre o texto fixo das regras, sem o rótulo de IA e sem mensagem de erro técnica.
+- **Orientações.** Mostre o texto definido pelas regras do sistema, com linguagem simples e sem mensagens técnicas.
 
 ## Como usar este sistema
 

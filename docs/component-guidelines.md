@@ -1,5 +1,7 @@
 # Software UP — Guia de componentes
 
+**Escopo da primeira versão (28/10/2026):** sem IA. Componentes e rótulos de IA citados neste catálogo são referências do escopo original e não são usados no produto atual.
+
 Cada componente tem um exemplo em `design-system/components/examples/<Componente>.html`. As classes vêm de `design-system/components/up.css`; ícones e formatadores, de `up.js`.
 
 # Fundamentos
@@ -330,7 +332,7 @@ Lista numerada de ações ou passos em ordem de prioridade. Mostra as "três pri
 
 **Forma:** cada item é uma caixa `surface-subtle` com borda fina, com o número em círculo preto ("01", "02") e o texto em 15px. `up-actionlist__meta` diz qual dado gerou a ação.
 
-**Regras:** no máximo três itens, na ordem das regras. No Início, o texto é o da regra, sem rótulo de IA. Na leitura do Raio-X, quando a IA reescreve as ações para o caso do aluno, o card ganha o rótulo "Escrito com apoio de IA". Se nenhuma regra se aplicar, troque a lista pelo alerta de sucesso com o texto fixo ("Seus números estão saudáveis…").
+**Regras:** no máximo três itens, na ordem das regras. No Início e na leitura do Raio-X, use os textos definidos pelas regras, sem geração externa ou rótulo de IA. Se nenhuma regra se aplicar, troque a lista pelo alerta de sucesso com o texto fixo ("Seus números estão saudáveis…").
 
 ## NextSteps
 

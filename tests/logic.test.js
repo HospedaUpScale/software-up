@@ -7,3 +7,8 @@ x=L.finance({...F,revenue:10000,variable:{material:{value:12000}},fixed:{},debts
 x=L.finance({...F,debts:[{scope:'empresa',payment:30000,rate:8,overdue:true}]});assert.equal(x.traffic.debt,'vermelho');assert.ok(x.steps[0].includes('atraso'));
 assert.equal(L.simulateDebt(1000,0,250,0),4);assert.equal(L.simulateDebt(1000,5,20,0),null);
 console.log('PASS: Diagnóstico, empate, margens, custos, dívida, semáforo, simulação.');
+// Modelos determinísticos: preencher lacunas sem sobrescrever o plano do aluno.
+for(const area of ['Finanças','Vendas','Processos','Pessoas']){const template=L.planTemplate(area);for(const key of ['result','decision1','decision2','decision3','decision4','phase1','phase2','phase3'])assert.ok(template[key]?.length>10,`${area}: modelo incompleto`);}
+const myPlan={result:'Meu objetivo próprio',decision1:'   ',phase1:'Minha primeira fase',reminder:'sexta-feira'};
+const filled=L.applyPlanTemplate(myPlan,'Finanças');assert.equal(filled.result,myPlan.result);assert.equal(filled.phase1,myPlan.phase1);assert.equal(filled.reminder,myPlan.reminder);assert.ok(filled.decision1.trim());assert.equal(myPlan.decision1,'   ');assert.ok(L.planTemplate('desconhecido').result);
+console.log('PASS: modelos fixos por gargalo e preservação dos textos do aluno.');

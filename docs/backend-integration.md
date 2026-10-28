@@ -1,12 +1,14 @@
 # Integração de produção — Software UP
 
-Este documento delimita os contratos necessários para substituir o modo demonstrativo do frontend. **Não há backend implementado neste pacote.** Os estados locais e a seleção de plano no navegador são ferramentas de preview, e não controles de segurança.
+Este documento reúne os contratos da integração. A base de autenticação e persistência já foi implementada; os requisitos pendentes de lançamento constam no README. Os estados locais e a seleção de plano no navegador são ferramentas de prévia, e não controles de segurança.
+
+**Decisão de escopo — 28/10/2026:** a primeira versão funcionará sem IA, com cálculos, regras, orientações fixas e modelos editáveis. Não é necessário configurar provedor, chave, orçamento ou endpoint de geração. Essa decisão substitui as previsões de IA do escopo original.
 
 ## Infraestrutura alvo
 
 - Hostinger VPS (Ubuntu, Nginx, TLS e Docker se desejado).
 - API no servidor (stack a definir), PostgreSQL ou MySQL, armazenamento com backup e monitoramento.
-- Envio transacional de e-mails por serviço externo; API de IA apenas pelo servidor.
+- Envio transacional de e-mails por serviço externo.
 - Ambiente de homologação separado da produção.
 
 ## Endpoints esperados (proposta de integração)
@@ -24,7 +26,6 @@ Este documento delimita os contratos necessários para substituir o modo demonst
 | GET/POST | `/api/kit/offers` | Oferta editável por aluno, apenas para Kit Completo. |
 | GET/POST | `/api/kit/plan-90` | Plano, check-ins e lembretes. |
 | GET/POST | `/api/kit/procedures` | Procedimentos exportáveis. |
-| POST | `/api/ai/generate` | Envia apenas dados mínimos; recebe JSON validado, salva versão/custo/uso. |
 | POST | `/webhooks/kiwify` | Autenticação de webhook e atualização de permissões. |
 | GET/POST | `/api/admin/*` | Administração com perfil `admin` ou `suporte`, auditoria e privacidade. |
 
@@ -35,8 +36,8 @@ Este documento delimita os contratos necessários para substituir o modo demonst
 - Reembolso e chargeback revogam **somente** o produto correspondente; dados permanecem registrados segundo a política definida.
 - Permissões independentes: `front` libera Diagnóstico + Raio-X; `essencial` ferramentas 1 e 2 do Kit; `kit` todas as cinco.
 - Desautorizar no servidor toda chamada de recurso sem compra ativa, independentemente de tela/botão oculto.
-- Custos e números calculados com aritmética decimal e testados centavo a centavo; IA produz texto, nunca decisões de permissão ou cálculos.
-- Não enviar identificação de contato à IA; prompts versionados e aprovados; saída JSON validada, cache e fallback de texto fixo.
+- Custos e números calculados com aritmética decimal e testados centavo a centavo. Diagnósticos, comparações e prioridades usam regras fixas do sistema.
+- Orientações e modelos versionados e revisados. Não enviar informações do aluno a serviços de IA nesta versão.
 - Termo e política aprovados com aceite versionado, exportação e exclusão de dados conforme LGPD.
 - O material do Pr. Rafael, da Bring e as perguntas exatas ainda precisam de validação de conteúdo.
 
@@ -56,4 +57,4 @@ A primeira etapa do backend está em `server/index.js`, com login, sessões e pe
 
 Os endpoints implementados são `POST /api/auth/request-code`, `POST /api/auth/verify-code`, `POST /api/auth/logout`, `GET /api/me` e `GET/PUT /api/state`. O último é um adaptador temporário para a interface existente; os endpoints por recurso da tabela acima permanecem como evolução planejada.
 
-A afirmação inicial de ausência de backend descreve o pacote original. O webhook Kiwify, IA, administração, LGPD e os critérios de liberação acima continuam pendentes. A indicação HMAC-SHA1 no documento original deve ser confirmada com a documentação vigente e um payload real antes da implementação; não assumir compatibilidade entre contratos antigos e novos da Kiwify.
+A afirmação inicial de ausência de backend descreve o pacote original. O webhook Kiwify, administração, LGPD e os critérios de liberação acima continuam pendentes. A IA foi retirada do escopo da primeira versão. A indicação HMAC-SHA1 no documento original deve ser confirmada com a documentação vigente e um payload real antes da implementação; não assumir compatibilidade entre contratos antigos e novos da Kiwify.

@@ -2,6 +2,8 @@
 
 Interface em HTML, CSS e JavaScript, com backend Node.js, MySQL em produção e SQLite para desenvolvimento local.
 
+**Escopo aprovado da primeira versão: sem IA.** Diagnósticos, indicadores, comparações e orientações usam cálculos e regras fixas. Roteiros, ofertas, procedimentos e planos usam modelos editáveis. Não há serviço, chave ou custo de geração de IA nesta versão.
+
 ## Executar localmente
 
 Requer Node.js 22.16 ou superior (recomendado: Node.js 24).
@@ -50,7 +52,7 @@ Esta é a primeira etapa de integração, ainda não uma versão aprovada para p
 - A API usa um documento por aluno e substituição por campo. Edições simultâneas do mesmo campo podem prevalecer pela última gravação; migrar para operações por recurso e controle de versão.
 - Reforçar a validação de cada formulário no servidor e migrar cálculos monetários para representação decimal, com testes por centavo.
 - Validar MySQL, entrega real de e-mails e navegador na hospedagem. A verificação automatizada local não comprova esses serviços externos.
-- IA com prompts aprovados, administração autenticada, termos versionados, exportação/exclusão de conta e auditoria ainda pendentes.
+- Administração autenticada, termos versionados, exportação/exclusão de conta e auditoria ainda pendentes.
 - Configurar e testar backups, restauração, carga e monitoramento.
 - Aprovar conteúdos do Pr. Rafael/Bring e canais oficiais de suporte.
 
@@ -77,3 +79,9 @@ O layout aprovado é aplicado por `app/redesign.css`. O menu azul escuro pode se
 `app/forms.js` cuida da validação junto aos campos, rascunhos, rótulos acessíveis e mensagens de estado. Lançamentos, contas, ofertas e procedimentos têm criação e edição; o perfil permite atualizar o nome, e a API autenticada mantém o e-mail de acesso protegido. O Raio-X e o simulador de quitação mostram prévias enquanto os valores são preenchidos.
 
 Os testes de fluxos cobrem criação e edição sem duplicação, pagamento de contas, plano, check-ins e persistência da prévia. A suíte também verifica a alteração autenticada de nome. Isso não substitui as validações de produção listadas acima.
+
+## Regras e modelos da primeira versão
+
+O Plano de 90 Dias oferece modelos iniciais para Finanças, Vendas, Processos e Pessoas. O aluno pode visualizar o modelo e usá-lo para preencher somente os campos vazios. Os valores existentes e os textos digitados são preservados; o plano é salvo somente após revisão e confirmação pelo botão de salvar.
+
+Os modelos são bases editáveis para revisão. Os textos oficiais da Bring e do Pr. Rafael ainda dependem de fornecimento/aprovação; a ausência de IA não transforma os modelos atuais em conteúdo oficialmente aprovado.

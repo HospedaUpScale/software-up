@@ -52,5 +52,20 @@
   return {revenue,sales,cv,mc,mcPct,fixed,operating:mc-fixed,owner,liquid,corpDebt,personalDebt,afterDebt,afterPct,ticket:sales>0?revenue/sales:null,breakEven,slack,months,debtWeight,houseLeft,traffic,steps:steps.slice(0,3),orderedDebts:[...ds].sort((a,b)=>Number(!!b.overdue)-Number(!!a.overdue)||finite(b.rate)-finite(a.rate))};
  }
  function simulateDebt(balance,rate,payment,extra){let b=finite(balance),r=finite(rate)/100,p=finite(payment)+finite(extra);if(b<=0)return 0;if(p<=b*r||p<=0)return null;let n=0;while(b>.005&&n<1200){b=Math.max(0,b*(1+r)-p);n++;}return n<1200?n:null;}
- return {diagnostic,finance,simulateDebt,average};
+ function planTemplate(area){
+  const models={
+   Finanças:{result:'Organizar os registros financeiros e acompanhar o caixa da empresa.',decisions:['Separar os registros da empresa e da casa.','Registrar entradas, saídas e vencimentos toda semana.','Revisar preços e custos com os dados do Raio-X.','Definir uma rotina mensal de conferência e planejamento.'],phases:['Reunir os números, organizar os registros e preencher o Raio-X.','Aplicar os ajustes escolhidos e conferir o caixa semanalmente.','Comparar os resultados, revisar o que funcionou e manter a rotina.']},
+   Vendas:{result:'Organizar a oferta e acompanhar uma rotina comercial.',decisions:['Definir o público e o problema que a oferta resolve.','Revisar a promessa, a entrega e as condições da oferta.','Escolher canais de contato e adaptar os roteiros de prospecção.','Registrar conversas, propostas e retornos dos clientes.'],phases:['Revisar o público, a oferta e os canais de contato.','Aplicar os roteiros e acompanhar as conversas e propostas.','Comparar os resultados dos canais e ajustar a rotina comercial.']},
+   Processos:{result:'Documentar a rotina mais importante e reduzir retrabalho.',decisions:['Escolher um processo que precisa de organização.','Escrever as etapas, o responsável e o resultado esperado.','Definir o padrão de qualidade e como tratar problemas.','Combinar prazos e uma rotina de acompanhamento.'],phases:['Mapear o processo escolhido e registrar como ele funciona hoje.','Testar o procedimento com os responsáveis e ajustar as etapas.','Revisar os resultados e consolidar a rotina documentada.']},
+   Pessoas:{result:'Dar clareza às responsabilidades e ao acompanhamento da equipe.',decisions:['Definir as responsabilidades de cada pessoa.','Combinar entregas, prazos e critérios de qualidade.','Escolher uma tarefa para delegar com um procedimento claro.','Criar uma rotina de alinhamento e retorno sobre as entregas.'],phases:['Mapear responsabilidades e alinhar as principais entregas.','Aplicar a delegação e acompanhar as dificuldades da equipe.','Revisar os acordos, registrar ajustes e manter o acompanhamento.']}
+  };
+  const model=Object.hasOwn(models,area)?models[area]:{result:'Escolher uma prioridade do negócio e acompanhar sua execução.',decisions:['Registrar a prioridade que precisa de atenção.','Definir a primeira ação e seu responsável.','Combinar um prazo e um resultado observável.','Reservar um momento semanal para revisar o avanço.'],phases:['Entender a prioridade e organizar as primeiras ações.','Executar as ações escolhidas e registrar os avanços.','Comparar os resultados e ajustar os próximos passos.']};
+  return {result:model.result,...Object.fromEntries(model.decisions.map((text,i)=>['decision'+(i+1),text])),...Object.fromEntries(model.phases.map((text,i)=>['phase'+(i+1),text]))};
+ }
+ function applyPlanTemplate(current,area){
+  const next={...current};
+  for(const [key,value]of Object.entries(planTemplate(area)))if(!String(next[key]??'').trim())next[key]=value;
+  return next;
+ }
+ return {diagnostic,finance,simulateDebt,average,planTemplate,applyPlanTemplate};
 });
