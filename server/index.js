@@ -38,6 +38,7 @@ async function createApp({store,sendCode,now=Date.now}={}){
  });
  app.use('/api',async(req,res,next)=>{const cookie=(req.headers.cookie||'').split(';').map(x=>x.trim()).find(x=>x.startsWith('up_session='));const key=cookie?hash(cookie.slice(11)):null,session=sessions.get(key);if(!session||session.expires<=now())return res.status(401).json({error:'Entre novamente para continuar.'});req.sessionKey=key;req.email=session.email;req.account=await store.get(req.email);if(!req.account)return res.status(401).json({error:'Conta indisponível.'});next();});
  app.get('/api/me',(req,res)=>res.json({user:req.account.user,entitlements:req.account.entitlements}));
+ app.patch('/api/me',async(req,res)=>{const name=typeof req.body.name==='string'?req.body.name.trim():'';if(name.length<2||name.length>120||Object.keys(req.body).some(key=>key!=='name'))return res.status(400).json({error:'Informe um nome entre 2 e 120 caracteres.'});const account=await store.get(req.email);account.user={...account.user,name};await store.put(req.email,account);res.json({user:account.user});});
  app.post('/api/auth/logout',(req,res)=>{sessions.delete(req.sessionKey);res.clearCookie('up_session',{path:'/'});res.json({ok:true});});
  function allowed(account,key){return !!(account.entitlements?.[key]||(key==='essencial'&&account.entitlements?.kit));}
  app.get('/api/state',(req,res)=>{const data={};for(const [group,keys]of Object.entries(groups))if(allowed(req.account,group))for(const key of keys)if(req.account.state?.[key]!==undefined)data[key]=req.account.state[key];res.json(data);});

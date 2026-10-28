@@ -1,6 +1,7 @@
 /* Software UP — ícones e utilitários do design system. Sem dependências. */
 (function () {
   var ICONS = {
+  "bell": "<path d=\"M18 8a6 6 0 0 0-12 0v5l-2 4h16l-2-4Z\"/><path d=\"M10 20a2 2 0 0 0 4 0\"/>",
   "home": "<path d=\"M3.5 10.5 12 3.5l8.5 7\"/><path d=\"M5.5 9v11.5h13V9\"/><path d=\"M10 20.5v-6h4v6\"/>",
   "clipboard-check": "<path d=\"M9 4.5H7a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6.5a2 2 0 0 0-2-2h-2\"/><rect x=\"9\" y=\"3\" width=\"6\" height=\"3\" rx=\"1\"/><path d=\"m9 13.5 2 2 4-4\"/>",
   "chart-bar": "<path d=\"M4 20.5h16\"/><path d=\"M7 17v-6\"/><path d=\"M12 17V6\"/><path d=\"M17 17v-4\"/>",

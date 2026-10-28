@@ -4,7 +4,7 @@
   "private": true,
   "description": "Frontend navegável do Software UP sobre o Design System original",
   "scripts": {
-    "test": "node tests/logic.test.js && node tests/screens.test.js && node --test tests/backend.test.js",
+    "test": "node tests/logic.test.js && node tests/screens.test.js && node --test tests/backend.test.js tests/workflows.test.js",
     "start": "node server/index.js",
     "dev": "node --watch server/index.js",
     "account": "node server/account.js"

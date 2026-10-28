@@ -62,10 +62,18 @@ npm test
 
 ## GitHub
 
-O projeto inclui `.gitignore` para dependências, dados locais e segredos, além de `package-lock.json` para instalação reproduzível. Repositório privado: [HospedaUpScale/software-up](https://github.com/HospedaUpScale/software-up). A branch principal é `main`.
+O projeto inclui `.gitignore` para dependências, dados locais e segredos, além de `package-lock.json` para instalação reproduzível. Repositório público: [HospedaUpScale/software-up](https://github.com/HospedaUpScale/software-up). A branch principal é `main`.
 
 ## Interface e prévia visual
 
-Acesse `http://localhost:3000/app/preview.html` para percorrer as telas com dados ilustrativos, sem autenticação. Essa prévia não consulta a API nem grava alterações no banco ou no armazenamento do navegador. O login normal continua em `/`.
+Acesse `http://localhost:3000/app/preview.html` para percorrer as telas com dados ilustrativos, sem autenticação. Essa prévia não consulta a API nem grava alterações no banco. Os registros e os rascunhos são preservados neste navegador, em chaves próprias da demonstração. Use somente dados fictícios. O login normal continua em `/`.
 
 A camada `app/theme.css` aplica os tokens oficiais azul `#0031E8` e laranja `#FF8D00`. Os gráficos em `app/charts.js` usam SVG responsivo, animação ao entrar na tela, legendas, valores acessíveis e suporte a movimento reduzido. O painel, Diagnóstico, Raio-X, histórico e prévia administrativa compartilham essa linguagem visual.
+
+## Formulários e navegação
+
+O layout aprovado é aplicado por `app/redesign.css`. O menu azul escuro pode ser recolhido no desktop e aberto como painel no celular; a preferência é local.
+
+`app/forms.js` cuida da validação junto aos campos, rascunhos, rótulos acessíveis e mensagens de estado. Lançamentos, contas, ofertas e procedimentos têm criação e edição; o perfil permite atualizar o nome, e a API autenticada mantém o e-mail de acesso protegido. O Raio-X e o simulador de quitação mostram prévias enquanto os valores são preenchidos.
+
+Os testes de fluxos cobrem criação e edição sem duplicação, pagamento de contas, plano, check-ins e persistência da prévia. A suíte também verifica a alteração autenticada de nome. Isso não substitui as validações de produção listadas acima.
